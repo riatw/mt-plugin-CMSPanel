@@ -1,0 +1,11 @@
+name: CMS Panel
+id: CMSPanel
+description: MovableType5をCMSとして運用するためのパネル
+version: 1.0
+widgets:
+  cms_panel:
+    label: スタート.まず更新する箇所を下から選択します
+    plugin: $CMSPanel
+    template: cmspanel_widget.mtml
+    singular: true
+    set: main

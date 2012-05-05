@@ -1,0 +1,60 @@
+.cmspanel {
+	line-height:1.6;
+	font-size:1.16em;
+}
+.cmspanel .blog-box {
+    border : 1px solid #cccccc;
+    margin-bottom : 10px;
+}
+.cmspanel .blog-box .blog-last-modified{
+	margin-top:1em;
+}
+.cmspanel .blog-box-inner {
+    padding : 5px;
+}
+.cmspanel .left-box {
+    float : left;
+    width : 70%;
+}
+.cmspanel .left-box .left-box-inner{
+    padding-right : 10px;
+}
+.cmspanel .right-box {
+    float : left;
+    width : 29%;
+}
+.cmspanel .clear-box {
+    clear : both;
+}
+.cmspanel .blog-name {
+    font-size : 150%;
+}
+
+.cmspanel h4 {
+	margin-top:0;
+    margin-bottom : 3px;
+}
+.cmspanel li {
+    margin-bottom : 3px;
+}
+.cmspanel .blog-description{
+	margin-top:15px;
+}
+
+.cmspanel ul.nav{
+	margin:10px 0 0 0;
+}
+.cmspanel ul.nav li{
+	display:inline;
+	margin-right:10px;
+}
+
+.cmspanel ul.nav li a:hover img{
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+}
+
+#menu div#nav ul li a:hover img{
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+}

@@ -1,0 +1,53 @@
+<mt:ignore>表示したくないブログIDの設定</mt:ignore>
+<mt:setvar name="exeblog" value="1">
+
+<mt:ignore>スタイルシートの設定</mt:ignore>
+<mt:setvarblock name="html_head" append="1">
+    <link rel="stylesheet" href="<mt:var name="static_uri">plugins/CMSPanel/css/cmspanel.css" type="text/css" />
+</mt:setvarblock>
+
+<mt:ignore>ブログごとのメニュー</mt:ignore>
+<mt:setvartemplate name="blog_menu">
+<mt:ignore><h4><MTBlogName></h4></mt:ignore>
+  <div class="blog-box"><div class="blog-box-inner">
+<mt:unless tag="BlogId" eq="$blog_id">
+    <div class="blog-name"><a href="<mt:var name="mt_url">?__mode=dashboard&amp;blog_id=<$mt:blogid$>" title="<$mt:blogname$>のダッシュボードに移動"><mt:blogname></a> <a href="/" target="_blank"><img src="<$mt:var name="static_uri"$>plugins/CMSPanel/images/view-site.png" alt="サイトを表示" title="サイトを表示" /></a></div>
+</mt:unless>
+      <ul class="nav">
+        <li><a href="<mt:var name="mt_url">?__mode=view&amp;_type=entry&amp;blog_id=<$mt:blogid$>"><img src="<mt:var name="static_uri">plugins/CMSPanel/images/cp_btn01.jpg" alt="" /></a></li>
+        <li><a href="<mt:var name="mt_url">?__mode=list&_type=entry&blog_id=<$mt:blogid$>"><img src="<mt:var name="static_uri">plugins/CMSPanel/images/cp_btn02.jpg" alt="" /></a></li>
+        <li><a href="<mt:var name="mt_url">?__mode=rebuild_confirm&blog_id=<$mt:blogid$>" target="_blank"><img src="<mt:var name="static_uri">plugins/CMSPanel/images/cp_btn03.jpg" alt="" /></a></li>
+      </ul>
+    <div class="left-box"><div class="left-box-inner">
+      <mt:ifnonempty tag="blogdescription"><div class="blog-description"><mt:blogdescription nl2br="xhtml"></div></mt:ifnonempty>
+      <div class="blog-last-modified">最近編集した箇所一覧（再編集する場合はタイトルをクリック）：<br /><mt:ifnonzero tag="blogentrycount"><mt:entries lastn="10"><a href="<$mt:var name="mt_url">?__mode=view&amp;_type=entry&amp;id=<$mt:entryid$>&amp;blog_id=<$mt:blogid$>" title="記事を編集"><$mt:entrytitle$></a><MTIf tag="EntryCategory">(<MTEntryCategory>)</MTIf><br /></mt:entries><mt:else>まだ記事を投稿していません。</mt:ifnonzero></div>
+
+    </div></div>
+    <div class="right-box">
+<!--
+      <ul>
+        <li><a href="<mt:var name="mt_url">?__mode=list_entry&amp;blog_id=<$mt:blogid$>"><img src="<mt:var name="static_uri">images/nav_icons/mini/entries.gif" alt="" /> ブログ記事 : <mt:blogentrycount>件</a></li>
+      </ul>
+-->
+    </div>
+    <div class="clear-box"></div>
+  </div></div>
+</mt:setvartemplate>
+
+<mt:setvarBlock name="tmpblogid"><mt:var name="blog_id">,<mt:var name="exeblog"></mt:setvarBlock>
+
+<mt:ignore>ダッシュボードウィジェットの出力</mt:ignore>
+<mtapp:widget id="cmspanel" class="widget cmspanel" label="更新を行いたい箇所を選択してください" can_close="1">
+  <mt:if name="blog_id">
+    <mt:ignore>ブログ毎のダッシュボードの場合</mt:ignore>
+    <mt:getvar name="blog_menu">
+    <mt:blogs exclude_blogs="$tmpblogid">
+      <mt:getvar name="blog_menu">
+    </mt:blogs>
+  <mt:else>
+    <mt:ignore>システムのダッシュボードの場合</mt:ignore>
+    <mt:blogs exclude_blogs="$exeblog">
+      <mt:getvar name="blog_menu">
+    </mt:blogs>
+  </mt:if>
+</mtapp:widget>
